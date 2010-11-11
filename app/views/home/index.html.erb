@@ -1,0 +1,9 @@
+<h1>Bolf Tracker</h1>
+
+<ul>
+<% @games.each do |game| %>
+  <li>
+    <%= game.game_date %> - <%= game.scores.count %>
+  </li>
+<% end %>
+</ul>

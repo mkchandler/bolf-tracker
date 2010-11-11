@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game date:</strong>
+  <%= @game.game_date %>
+</p>
+
+<h2>Scores</h2>
+<div id="scores">	
+	<%= render :partial => @game.scores %>
+</div>
+
+<% form_for [@game, Score.new()] do |f| %>
+  <div class="field">
+    <%= f.label :player_id %><br />
+    <%= select("score", "player_id", Player.all.collect {|p| [ p.name, p.id ] }, :prompt => false) %>
+  </div>
+  <div class="field">
+    <%= f.label :points %><br />
+    <%= f.text_field :points %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add Score" %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

@@ -1,0 +1,6 @@
+<% div_for score do %>
+	<p>
+		<%= score.player.name %> - <%= score.points %> - 
+    <%= link_to 'Edit', edit_game_score_path(@game, score) %> <%= link_to 'Delete', game_score_path(@game, score), :confirm => 'Are you sure?', :method => :delete %>
+	</p>
+<% end %>

@@ -1,0 +1,14 @@
+<h1>Editing score</h1>
+
+<% form_tag(game_score_path, :method => "put") do %>
+  <div class="field">
+    <%= label_tag @score.player.name %>
+  </div>
+  <div class="field">
+    <%= label_tag :points %><br />
+    <%= text_field_tag :points, @score.points %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Edit Score" %>
+  </div>
+<% end %>
