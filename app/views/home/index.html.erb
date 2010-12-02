@@ -1,9 +1,39 @@
 <h1>Bolf Tracker</h1>
 
-<ul>
-<% @games.each do |game| %>
-  <li>
-    <%= game.game_date %> - <%= game.scores.count %>
-  </li>
-<% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 70px;">Player</th>
+      <th title="Wins">W</th>
+      <th title="Losses">L</th>
+      <th style="width: 50px;" title="Win Percentage">PCT</th>
+      <th title="Total Points For">PF</th>
+      <th title="Average Points Per Game">PPG</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @players.each do |player| %>
+    <% unless player.num_of_games.zero? %>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= player.games_won %></td>
+      <td><%= player.games_lost %></td>
+      <td>
+        <% if player.winning_pct == 1 %>
+        1.000
+        <% else %>
+        <%= sprintf("%.3f", player.winning_pct).to_s[/.(.*)/m,1] %>
+        <% end %>
+      </td>
+      <td><%= player.points %></td>
+      <td><%= player.points_per_game %></td>
+    </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Games', games_path %>
+<br>
+<br>
+<%= link_to 'Players', players_path %>

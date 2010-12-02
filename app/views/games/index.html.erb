@@ -2,15 +2,16 @@
 
 <table>
   <tr>
-    <th>Game date</th>
+    <th>Game Date</th>
+    <th>Winner</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.game_date %></td>
+    <td><%= game.game_date.strftime("%m/%d/%Y") %></td>
+    <td><%= game.winner.player.name %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Delete', game, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -18,6 +19,8 @@
 <% end %>
 </table>
 
-<br />
-
+<br>
 <%= link_to 'New Game', new_game_path %>
+<br>
+<br>
+<%= link_to 'Rankings', root_path %>

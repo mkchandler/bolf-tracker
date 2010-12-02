@@ -1,6 +1,21 @@
-<% div_for score do %>
-	<p>
-		<%= score.player.name %> - <%= score.points %> - 
-    <%= link_to 'Edit', edit_game_score_path(@game, score) %> <%= link_to 'Delete', game_score_path(@game, score), :confirm => 'Are you sure?', :method => :delete %>
-	</p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Score</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @scores.each do |score| %>
+    <tr>
+      <td><%= score.player.name %></td>
+      <td><%= score.points %></td>
+      <td>
+        <%= link_to 'Edit', edit_game_score_path(@game, score) %>
+        <%= link_to 'Delete', game_score_path(@game, score), :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
