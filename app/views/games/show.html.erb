@@ -34,7 +34,7 @@
 <% form_for [@game, Score.new()] do |f| %>
   <div class="field">
     <%= f.label :player_id %><br />
-    <%= select("score", "player_id", Player.all.collect {|p| [ p.name, p.id ] }, :prompt => false) %>
+    <%= select("score", "player_id", @players.collect {|p| [ p.name, p.id ] }, :prompt => false) %>
   </div>
   <div class="field">
     <%= f.label :points %><br />

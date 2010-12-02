@@ -7,6 +7,8 @@ class GamesController < ApplicationController
   # GET /games/1  
   def show
     @game = Game.find(params[:id])
+    @players = Player.all
+    @players.sort! { |a,b| a.name <=> b.name }
   end
 
   # GET /games/new  
@@ -45,6 +47,12 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
+    
+    @scores = Score.where(:game_id => params[:id])
+    
+    @scores.each do |score|
+      score.destroy
+    end
     
     redirect_to(games_url)
   end

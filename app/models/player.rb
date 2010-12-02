@@ -31,7 +31,7 @@ class Player < ActiveRecord::Base
     if (num_of_games.nil? or num_of_games.zero?)
       return 0
     else
-      return points / num_of_games
+      return (points.to_f / num_of_games.to_f).ceil
     end
   end
   
