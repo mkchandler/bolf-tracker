@@ -1,4 +1,4 @@
-<h1>Listing players</h1>
+<h1>Players</h1>
 
 <table>
   <tr>
@@ -13,11 +13,16 @@
     <td><%= player.name %></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', player, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
+<br>
 <%= link_to 'New Player', new_player_path %>
+<br>
+<br>
+<%= link_to 'Rankings', root_path %>
+<br>
+<br>
+<%= link_to 'Games', games_path %>
