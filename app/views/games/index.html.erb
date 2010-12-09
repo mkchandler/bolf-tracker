@@ -1,25 +1,22 @@
 <h1>Games</h1>
 
-<table>
-  <tr>
-    <th>Game Date</th>
-    <th>Winner</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<section id="games">
 <% @games.each do |game| %>
-  <tr>
-    <td><%= game.game_date.strftime("%m/%d/%Y") %></td>
-    <td><%= game.winner.player.name %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Delete', game, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <div class="game">
+    <time><%= link_to game.game_date.strftime("%m/%d/%Y"), edit_game_path(game) %></time>
+    <% game.scores.sort!{|a,b| b.points <=> a.points}.each do |score| %>
+      <div class="score">
+        <span><%= score.player.name %></span>
+        <span class="points"><%= score.points %></span>
+      </div>
+    <% end %>
+    <div class="options"><%= link_to 'Delete', game, :confirm => 'Are you sure?', :method => :delete %></div>
+  </div>
 <% end %>
-</table>
+</section>
 
 <br>
+<nav>
 <%= link_to 'New Game', new_game_path %>
 <br>
 <br>
@@ -27,3 +24,4 @@
 <br>
 <br>
 <%= link_to 'Players', players_path %>
+</nav>

@@ -8,4 +8,8 @@ class Game < ActiveRecord::Base
   def winner
     Score.where(:game_id => id).where(:points => winning_score).first
   end
+  
+  def average_num_of_games
+    
+  end
 end

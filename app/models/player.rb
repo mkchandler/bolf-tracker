@@ -23,6 +23,10 @@ class Player < ActiveRecord::Base
     Score.where(:player_id => id).count
   end
   
+  def eligible?
+    
+  end
+  
   def points
     Score.where(:player_id => id).sum("points")
   end
