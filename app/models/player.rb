@@ -1,19 +1,19 @@
 class Player < ActiveRecord::Base
-	has_many :scores
+    has_many :scores
   
-  @games_won = 0
-  
-  def games_won
     @games_won = 0
+  
+    def games_won
+        @games_won = 0
     
-    Game.all.each do |g|
-      if g.winner.player.id == id
-        @games_won += 1
-      end
+        Game.all.each do |g|
+            if g.winner.player.id == id
+                @games_won += 1
+            end
+        end
+    
+        return @games_won
     end
-    
-    return @games_won
-  end
   
   def games_lost
     num_of_games - games_won

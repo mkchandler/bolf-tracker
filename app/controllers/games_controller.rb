@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   # GET /games  
   def index
-    @games = Game.all
+    @games = Game.find(:all, :order => "id desc", :limit => 10)
   end
 
   # GET /games/1  

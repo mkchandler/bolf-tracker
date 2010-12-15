@@ -1,53 +1,56 @@
 class ScoresController < ApplicationController
-  # GET /scores  
-  def index
-    @scores = Score.all
-  end
-
-  # GET /scores/1  
-  def show
-    @score = Score.find(params[:id])
-  end
-
-  # GET /scores/new  
-  def new
-    @score = Score.new
-  end
-
-  # GET /scores/edit
-  def edit
-    @score = Score.find(params[:id])
-  end
-
-  # POST /scores  
-  def create
-	  @game = Game.find(params[:game_id])
-    @score = @game.scores.create!(params[:score])
-
-    if @score.save
-      redirect_to(game_url(params[:game_id]))
-    else
-      render :new
+    # GET /scores  
+    def index
+        @scores = Score.all
     end
-  end
 
-  # PUT /scores/1  
-  def update
-    @score = Score.find(params[:id])
-    @score.points = params[:points]
+    # GET /scores/1  
+    def show
+        @score = Score.find(params[:id])
+    end
+
+    # GET /scores/new  
+    def new
+        @score = Score.new
+    end
+
+    # GET /scores/edit
+    def edit
+        @score = Score.find(params[:id])
+    end
+
+    # POST /scores  
+    def create
+        @game = Game.find(params[:game_id])
+        @score = @game.scores.create!(params[:score])
+
+        if @score.save
+            expire_page(:controller => 'home', :action => 'index')
+            redirect_to(game_url(params[:game_id]))
+        else
+            render :new
+        end
+    end
+
+    # PUT /scores/1  
+    def update
+        @score = Score.find(params[:id])
+        @score.points = params[:points]
     
-    if @score.save
-      redirect_to(game_url(params[:game_id]))
-    else
-      render :edit
+        if @score.save
+            expire_page(:controller => 'home', :action => 'index')
+            redirect_to(game_url(params[:game_id]))
+        else
+            render :edit
+        end
     end
-  end
 
-  # DELETE /scores/1  
-  def destroy
-    @score = Score.find(params[:id])
-    @score.destroy
-
-    redirect_to(game_url(params[:game_id]))
-  end
+    # DELETE /scores/1  
+    def destroy
+        @score = Score.find(params[:id])
+        @score.destroy
+    
+        expire_page(:controller => 'home', :action => 'index')
+        redirect_to(game_url(params[:game_id]))
+    end
 end
