@@ -25,7 +25,6 @@ class ScoresController < ApplicationController
         @score = @game.scores.create!(params[:score])
 
         if @score.save
-            expire_page(:controller => 'home', :action => 'index')
             redirect_to(game_url(params[:game_id]))
         else
             render :new
@@ -38,7 +37,6 @@ class ScoresController < ApplicationController
         @score.points = params[:points]
     
         if @score.save
-            expire_page(:controller => 'home', :action => 'index')
             redirect_to(game_url(params[:game_id]))
         else
             render :edit
@@ -50,7 +48,6 @@ class ScoresController < ApplicationController
         @score = Score.find(params[:id])
         @score.destroy
     
-        expire_page(:controller => 'home', :action => 'index')
         redirect_to(game_url(params[:game_id]))
     end
 end
