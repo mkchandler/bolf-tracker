@@ -1,7 +1,8 @@
 class GamesController < ApplicationController
     # GET /games  
     def index
-        @games = Game.find(:all, :order => "id desc", :limit => 10)
+        @games = Game.where(:created_at => (Date.new(2011,01,01)..Date.new(2011,02,01)))
+        #Game.find(:all, :order => "id desc", :limit => 10)
 
         @games.each do |g|
             g.calculate_fields

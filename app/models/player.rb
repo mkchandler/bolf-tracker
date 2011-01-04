@@ -23,10 +23,13 @@ class Player < ActiveRecord::Base
         end
     end
   
-    def calculate_fields
+    def calculate_fields(year, month)
         @games_won = 0
         
-        Game.all.each do |g|
+        date_range = (Date.new(year, month, 01) - 1.day)..(Date.new(year, month, 01) + 1.month)
+        
+        @games = Game.where(:created_at => date_range)
+        @games.each do |g|
             g.calculate_fields
             if g.winner.player.id == id
                 @games_won += 1
@@ -36,7 +39,7 @@ class Player < ActiveRecord::Base
         @num_of_games = 0
         @points = 0
         
-        @num_of_games = Score.where(:player_id => id).count
-        @points = Score.where(:player_id => id).sum("points")
+        @num_of_games = Game.joins(:scores).where(:scores => { :player_id => id }, :created_at => date_range).count
+        @points = Game.joins(:scores).where(:scores => { :player_id => id }, :created_at => date_range).sum("points")
     end
 end

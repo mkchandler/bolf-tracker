@@ -1,5 +1,5 @@
 <h1>Bolf Tracker</h1>
-
+<h2><%= @current_month.strftime("%B %Y") %> Rankings</h2>
 <table>
   <thead>
     <tr>
@@ -12,7 +12,40 @@
     </tr>
   </thead>
   <tbody>
-  <% @players.each do |player| %>
+  <% @final_cur_month_players.each do |player| %>
+    <% unless player.num_of_games.zero? %>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= player.games_won %></td>
+      <td><%= player.games_lost %></td>
+      <td>
+        <% if player.winning_pct == 1 %>
+        1.000
+        <% else %>
+        <%= sprintf("%.3f", player.winning_pct).to_s[/.(.*)/m,1] %>
+        <% end %>
+      </td>
+      <td><%= player.points %></td>
+      <td><%= player.points_per_game %></td>
+    </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<h2><%= @previous_month.strftime("%B %Y") %> Rankings</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 160px;">Player</th>
+      <th title="Wins">W</th>
+      <th title="Losses">L</th>
+      <th style="width: 50px;" title="Win Percentage">PCT</th>
+      <th title="Total Points For">PF</th>
+      <th title="Average Points Per Game">PPG</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @final_prev_month_players.each do |player| %>
     <% unless player.num_of_games.zero? %>
     <tr>
       <td><%= player.name %></td>
